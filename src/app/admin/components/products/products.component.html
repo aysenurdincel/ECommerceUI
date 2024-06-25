@@ -1,0 +1,8 @@
+<mat-drawer-container class="create-product">
+    <mat-drawer class="create-product-side" mode="side" opened>
+      <app-add-product (onProductAdd)="onProductAdd($event)"></app-add-product>
+    </mat-drawer>
+    <mat-drawer-content><app-show-product></app-show-product></mat-drawer-content>
+  </mat-drawer-container>
+
+  

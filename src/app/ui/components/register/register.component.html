@@ -1,0 +1,49 @@
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                <label for="name"></label>
+              <input type="text" class="form-control" formControlName="name" placeholder="Adınız" id="name" aria-label="First name" 
+              [ngClass]="{'is-invalid':submitted && component.name.errors}">
+              <small class="form-text text-muted invalid-feedback" *ngIf="submitted && component.name.errors?.required">Lütfen adınızı giriniz.</small>
+              <small class="form-text text-muted invalid-feedback" *ngIf="submitted && (component.name.errors?.maxlength || component.name.errors?.minlength)">Adınız 2 ile 3 karakter arasında olmalıdır.</small>
+            </div>
+            <div class="col-sm-3">
+              <label for="username"></label>
+            <input type="text" class="form-control" formControlName="username" placeholder="Kullanıcı Adı" id="username" aria-label="Last name"
+            [ngClass]="{'is-invalid':submitted && component.username.errors}">
+            <small class="form-text text-muted invalid-feedback" *ngIf="submitted && component.username.errors?.required">Lütfen Kullanıcı adınızı giriniz.</small>
+            <small class="form-text text-muted invalid-feedback" *ngIf="submitted && (component.username.errors?.maxlength || component.username.errors?.minlength)">Adınız 2 ile 3 karakter arasında olmalıdır.</small>
+          </div>
+        </div>
+        <div class="row mb-3">           
+            <div class="col-sm-6">
+                <label for="email"></label>
+              <input type="email" class="form-control" formControlName="email" placeholder="Email" id="email"
+              [ngClass]="{'is-invalid':submitted && component.email.errors}">
+              <small class="form-text text-muted invalid-feedback" *ngIf="submitted && component.email.errors?.required">Lütfen email adresinizi giriniz.</small>
+              <small class="form-text text-muted invalid-feedback" *ngIf="submitted && component.email.errors?.email">Lütfen emaili düzgün giriniz.</small>
+            </div>
+          </div>
+          <div class="row mb-3">            
+            <div class="col-sm-6">
+                <label for="password"></label>
+              <input type="password" class="form-control" formControlName="password" placeholder="Şifre" id="password"
+              [ngClass]="{'is-invalid':submitted && component.password.errors}">
+            </div>
+          </div> 
+            <div class="row mb-3">     
+                <div class="col-sm-6">
+                    <label for="passwordConfirm"></label>
+                <input type="password" class="form-control" formControlName="passwordConfirm" placeholder="Şifre" id="passwordConfirm"
+                [ngClass]="{'is-invalid':submitted && component.passwordConfirm.errors}">
+                <small *ngIf="submitted && form.hasError('notSame')">Şifre eşleşmedi.</small>
+            </div>
+        </div>
+            <div class="row mb-3">
+                <div class="col-sm-6">                    
+                    <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+                </div>
+            </div>       
+    </form>
+ 

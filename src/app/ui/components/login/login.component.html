@@ -1,0 +1,14 @@
+<div class="col-sm-3">
+    <label for="username"></label>
+  <input #txtUsernameOrEmail type="text" class="form-control"  placeholder="Kullanıcı Adı / Email" id="username" aria-label="Last name">
+  
+</div>
+
+
+<div class="row mb-3">            
+  <div class="col-sm-6">
+      <label for="password"></label>
+    <input #txtPassword type="password" class="form-control"  placeholder="Şifre" id="password">
+  </div>
+</div> 
+<button type="submit" class="btn btn-primary" (click)="login(txtUsernameOrEmail.value,txtPassword.value)">Giriş Yap</button>
