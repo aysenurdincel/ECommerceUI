@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerTypes } from 'src/app/base/base.component';
 import { AuthorizationService } from 'src/app/services/common/authorization.service';
+import { UserAuthService } from 'src/app/services/common/user-auth.service';
 import { UserService } from 'src/app/services/common/user.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { UserService } from 'src/app/services/common/user.service';
 })
 export class LoginComponent extends BaseComponent implements OnInit {
 
-  constructor(private userService:UserService, 
+  constructor(private userAuth:UserAuthService, 
     spinner:NgxSpinnerService, 
     private authSerice:AuthorizationService,
     private activatedRoute:ActivatedRoute,
@@ -27,7 +28,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   async login(usernameOrEmail:string,password:string){
     this.showSpinner(SpinnerTypes.BallFussion)
-    await this.userService.login(usernameOrEmail,password, ()=>{
+    await this.userAuth.login(usernameOrEmail,password, ()=>{
 
       this.authSerice.identityalidation()
       this.activatedRoute.queryParams.subscribe(params => {
