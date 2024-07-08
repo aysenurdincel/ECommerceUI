@@ -20,6 +20,7 @@ export class UserAuthService {
     const tokenResponse : TokenResponse = await firstValueFrom(obs) as TokenResponse
     if(tokenResponse){
       localStorage.setItem("accessToken", tokenResponse.token.accessToken)
+      localStorage.setItem("refreshToken", tokenResponse.token.refreshToken)
       
 
       this.toastr.message("Kullanıcı başarıyla giriş yapmıştır","Giriş Başarılı", {
@@ -30,4 +31,18 @@ export class UserAuthService {
  
     successCallback()
   }
-}
+
+  async refreshTokenLogin(_refreshToken : string, callbackFunction?:() => void){
+    const obs : Observable<any|TokenResponse> = this.httpClient.post<any|TokenResponse>({
+      action:"refreshtokenlogin",
+      controller:"auth"
+    },{refreshToken: _refreshToken})
+
+    const tokenResponse : TokenResponse = await firstValueFrom(obs) as TokenResponse
+    if(tokenResponse){
+      localStorage.setItem("accessToken", tokenResponse.token.accessToken)
+      localStorage.setItem("refreshToken", tokenResponse.token.refreshToken)     
+    }
+    callbackFunction()
+  }
+} 

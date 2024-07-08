@@ -2,13 +2,14 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpStatusCode } 
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../ui/customized-toastr-service';
+import { UserAuthService } from './user-auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
 
-  constructor(private toastr:CustomToastrService) { }
+  constructor(private toastr:CustomToastrService, private userAuthService :UserAuthService ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -20,6 +21,7 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
               messageType: ToastrMessageType.Warning,
               position: ToastrPosition.TopRight
             })
+            this.userAuthService.refreshTokenLogin(localStorage.getItem("refreshToken")).then();
             break
           case HttpStatusCode.BadRequest:
             this.toastr.message("Yapılan istek geçersiz", "Geçersiz İstek",{
